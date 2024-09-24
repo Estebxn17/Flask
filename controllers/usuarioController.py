@@ -13,7 +13,7 @@ def login():
 
         if usuarios.find_one(usuario):
             session['user'] = usuario
-            email = yagmail.SMTP("ccuellar@misena.edu.co", open(".password").read(), encoding='UTF-8')
+            email = yagmail.SMTP("estebandaza491@gmail.com", open(".password").read(), encoding='UTF-8')
             mensaje = f"Se informa que el usuario {username} ha ingresado al sistema"
             thread = threading.Thread(target=enviarCorreo, args=(email, "estebandaza491@gmail.com", "Reporte ingreso al sistema usuario", mensaje))
             thread.start()
