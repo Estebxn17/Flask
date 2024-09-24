@@ -1,0 +1,45 @@
+{% extends "inicio.html" %}
+
+{% block navegacion %}
+{% endblock %}
+
+{% block contenido %}
+    <div class="max-w-md mx-auto p-4 bg-white shadow-md rounded mt-10">
+        <h1 class="text-3xl font-bold mb-4">Actualizar producto</h1>
+
+        <form action="{{ url_for('actualizar_producto') }}" method="POST" enctype="multipart/form-data" onsubmit="console.log('Formulario enviado');">
+            <input type="hidden" name="id" value="{{ producto._id }}"> 
+
+            <div>
+                <label for="txtNombre" class="block mb-2 text-sm font-bold">Nombre:</label>
+                <input type="text" id="txtNombre" name="txtNombre" value="{{ producto.nombre }}" class="w-full p-2 text-sm text-gray-700 border rounded" required>
+            </div>
+            <div>
+                <label for="txtPrecio" class="block mb-2 text-sm font-bold">Precio:</label>
+                <input type="number" id="txtPrecio" name="txtPrecio" value="{{ producto.precio }}" class="w-full p-2 text-sm text-gray-700 border rounded" required>
+            </div>
+            <div>
+                <label for="cbCategoria" class="block mb-2 text-sm font-bold">Categoría:</label>
+                <select name="cbCategoria" id="cbCategoria" required class="border rounded p-2 w-full">
+                    <option value="Electrónica" {% if producto.categoria == 'Electrónica' %}selected{% endif %}>Electrónica</option>
+                    <option value="Accesorios" {% if producto.categoria == 'Accesorios' %}selected{% endif %}>Accesorios</option>
+                    <option value="Fotografía" {% if producto.categoria == 'Fotografía' %}selected{% endif %}>Fotografía</option>
+                    <option value="Ropa" {% if producto.categoria == 'Ropa' %}selected{% endif %}>Ropa</option>
+                </select>
+            </div>
+            <div>
+                <label for="fileFoto" class="block mb-2 text-sm font-bold">Imagen:</label>
+                <input type="file" id="fileFoto" name="fileFoto" class="w-full p-2 text-sm text-gray-700 border rounded">
+            </div>
+            <div>
+                <input type="hidden" name="txtCodigo" value="{{ producto.codigo }}">  
+            </div>
+            <div>
+                <input type="submit" value="Actualizar" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
+            </div>
+        </form>
+        <div class="mt-4">
+            <a href="{{ url_for('listar_productos') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Volver a listar productos</a>
+        </div>
+    </div>
+{% endblock %}

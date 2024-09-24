@@ -1,0 +1,58 @@
+{% extends "inicio.html" %}
+
+{% block navegacion %}
+{% endblock %}
+
+{% block contenido %}
+<h1 class="text-center font-bold text-3xl mt-4">Lista de Productos</h1>
+<br>
+
+<div class="text-center mb-4">
+    <form action="{{ url_for('agregar') }}" method="get">
+        <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            Agregar Producto
+        </button>
+    </form>
+</div>
+
+<div class="relative overflow-x-auto shadow-md mt-4">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="py-3 px-6">Código</th>
+                <th scope="col" class="py-3 px-6">Nombre</th>
+                <th scope="col" class="py-3 px-6">Precio</th>
+                <th scope="col" class="py-3 px-6">Categoría</th>
+                <th scope="col" class="py-3 px-6">Foto</th>
+                <th scope="col" class="py-3 px-6">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <td class="py-4 px-6">{{ producto['codigo'] }}</td>
+                <td class="py-4 px-6">{{ producto['nombre'] }}</td>
+                <td class="py-4 px-6">{{ producto['precio'] }}</td>
+                <td class="py-4 px-6">{{ producto['categoria'] }}</td>
+                <td class="py-4 px-6">
+                    {% if producto['foto'] %}
+                    <img src="{{ url_for('static', filename='img/' + producto['foto']) }}" alt="Foto" width="50">
+                    {% else %}
+                    Sin foto
+                    {% endif %}
+                </td>
+                <td class="py-4 px-6">
+                    <form action="{{ url_for('eliminar', id=producto['_id']) }}" method="post" style="display:inline;">
+                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Eliminar</button>
+                    </form>
+                    
+                    <form action="{{ url_for('actualizar_producto') }}" method="post" style="display:inline;">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">Actualizar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "inicio.html" %}
+
+{% block navegacion %}
+{% endblock %}
+
+{% block contenido %}
+    <div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 mt-10">
+        <h1 class="text-center text-2xl font-bold text-gray-700 mb-6">Agregar Producto</h1>
+
+        <form action="{{ url_for('agregar') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+            <div>
+                <label for="txtCodigo" class="block text-gray-600 font-semibold">Código</label>
+                <input type="text" name="txtCodigo" id="txtCodigo" required class="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+                <label for="txtNombre" class="block text-gray-600 font-semibold">Nombre</label>
+                <input type="text" name="txtNombre" id="txtNombre" required class="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+                <label for="txtPrecio" class="block text-gray-600 font-semibold">Precio</label>
+                <input type="text" name="txtPrecio" id="txtPrecio" required class="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+                <label for="cbCategoria" class="block text-gray-600 font-semibold">Categoría</label>
+                <select name="cbCategoria" id="cbCategoria" required class="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="Electrónica">Electrónica</option>
+                    <option value="Accesorios">Accesorios</option>
+                    <option value="Fotografía">Fotografía</option>
+                    <option value="Ropa">Ropa</option>
+                </select>
+            </div>
+            <div>
+                <label for="fileFoto" class="block mb-2 text-sm font-bold">Imagen:</label>
+                <input type="file" id="fileFoto" name="fileFoto" class="w-full p-2 text-sm text-gray-700 border rounded" required>
+            </div>
+            <div>
+                <button type="submit" class="w-full text-white bg-green-500 hover:bg-green-700 px-4 py-2 rounded transition duration-200">Agregar Producto</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
